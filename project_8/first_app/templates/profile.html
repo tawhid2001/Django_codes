@@ -1,0 +1,24 @@
+{% extends "base.html" %} {% block body %}
+<div class='text-center'>
+
+    <h1 class="text-center">Proflie</h1>
+<p>Hello {{user}}</p>
+<p><a class='btn btn-info' href="{% url 'passwordchange' %}">Change Your Password</a>
+  <a class='btn btn-primary' href="{% url 'passwordchange2' %}"
+    >Change Your Password without old password</a
+  >
+</p>
+</div>
+
+{% load crispy_forms_tags %} {% if messages %} {% for m in messages %}
+<p class="bg-success text-white p-3 text-center">{{m}}</p>
+{% endfor %} {% endif %}
+
+<form method="post" style="width: 50%; margin: auto" class="d-flex flex-column" novalidate>
+  {% csrf_token %} {% for fm in form %} {{fm.label_tag}} {{fm}}
+  {{fm.errors|striptags}} {% endfor %}
+  <div>
+    <button type="submit" class="btn btn-primary mt-3">Submit</button>
+  </div>
+  {% endblock body %}
+</form>
